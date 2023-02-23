@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <title>Register</title>
+  </head>
+  <style>
+    .container {
+      width: 500px;
+      margin: 100px auto;
+      text-align: center;
+    }
+    form {
+      display: inline-block;
+      text-align: left;
+      padding: 20px;
+      background-color: #f2f2f2;
+      border-radius: 5px;
+    }
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    input[type="submit"] {
+      width: 100%;
+      background-color: #333;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <h2>Sign up</h2>
+      <form action="/register" method="post">
+        <input type="text" name="name" placeholder="Name" /><br />
+        <input type="text" name="email" placeholder="Email" /><br />
+        <input type="password" name="password" placeholder="Password" /><br />
+        <input type="submit" value="Submit" />
+        <a href="/login">Log in</a>
+      </form>
+      <br />
+    </div>
+  </body>
+</html>

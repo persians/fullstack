@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Random Blog</title>
+    <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Random Blog</h1>
+      <% if (req.session.user) { %>
+      <p>Hello, <%= req.session.user.name %></p>
+      <a href="/logout">Log Out</a>
+      <% } else { %>
+      <a href="/login">Login</a>
+      <% } %>
+    </header>
+    <main>
+      <% data.forEach(function (post) { %>
+      <article>
+        <% if(post.img != ''){ %>
+        <img src="<%= post.img %>" alt="post image" />
+        <% } %>
+        <h2><%= post.title %></h2>
+        <p><%= post.date %></p>
+        <p><%= post.text %></p>
+      </article>
+      <% }) %>
+    </main>
+  </body>
+</html>
