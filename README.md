@@ -2,18 +2,24 @@
 
 ## 9 febuary
 
-    Accomplishments: [Made a login / register page along with a database that stores user information. Made sure its impossible to get to main page without registering and logging in.]
+    Accomplishments:
+    - Made a login / register page
+    - Created a database that stores user information.
+    - Added site protection (unable to access the page without logging in).
 
     Next Steps: [Make it neccesary to be logged in in order to post.]
 
 ## 23 febuary
 
-    Accomplishments: [Sketched a general template for my site.]
+    Accomplishments:
+    - Sketched a general template for my site.
 
     Next Steps: [Make the username of users that post appear above post.]
 
 ## 09 March
 
-    Accomplishments: [Fixed the post function (was broken)]
+    Accomplishments:
+    - Fixed the post function.
+    - added user logs.
 
-    Next Steps: [Make the username of users that post appear above post.]
+    Next Steps: [Add a create post tab and a manage post tab.]
