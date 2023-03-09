@@ -115,20 +115,24 @@ app.get("/post", function (req, res) {
   res.render("post");
 });
 
-app.post("/post", upload.single("image"), function (req, res) {
+app.post("/post", upload.single("img"), (req, res) => {
   const title = req.body.title;
-  const description = req.body.description;
-  const image = req.file.filename;
+  const text = req.body.text;
+  const img = req.file ? `/uploads/${req.file.filename}` : "";
 
-  const sqlInsert =
-    "INSERT INTO post (title, description, image) VALUES (?, ?, ?);";
-  db.query(sqlInsert, [title, description, image], function (err, result) {
-    if (err) {
-      throw err;
-    } else {
-      res.redirect("/");
+  const sqlInsert = "INSERT INTO post (title, text, img) VALUES (?, ?, ?);";
+  db.query(
+    "INSERT INTO post (title, text, img) VALUES (?, ?, ?)",
+    [title, text, img],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Error creating post");
+      } else {
+        res.redirect("/");
+      }
     }
-  });
+  );
 });
 
 app.listen(3000, function () {

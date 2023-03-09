@@ -11,3 +11,9 @@
     Accomplishments: [Sketched a general template for my site.]
 
     Next Steps: [Make the username of users that post appear above post.]
+
+## 09 March
+
+    Accomplishments: [Fixed the post function (was broken)]
+
+    Next Steps: [Make the username of users that post appear above post.]
