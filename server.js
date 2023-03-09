@@ -108,14 +108,14 @@ app.get("/logout", function (req, res) {
   });
 });
 
-app.get("/create-post", function (req, res) {
+app.get("/post", function (req, res) {
   if (!req.session.user) {
     return res.redirect("/login");
   }
-  res.render("create-post");
+  res.render("post");
 });
 
-app.post("/create-post", upload.single("image"), function (req, res) {
+app.post("/post", upload.single("image"), function (req, res) {
   const title = req.body.title;
   const description = req.body.description;
   const image = req.file.filename;
