@@ -28,7 +28,8 @@ app.get("/", function (req, res) {
     // If the user is not logged in, redirect them to the login page
     return res.redirect("/login");
   }
-  let sql = "SELECT * FROM post ORDER BY date DESC";
+  let sql =
+    "SELECT post.*, users.name FROM post JOIN users ON post.user_id = users.id ORDER BY post.date DESC";
   db.query(sql, function (err, results) {
     if (err) {
       throw err;
@@ -85,7 +86,11 @@ app.post("/login", function (req, res) {
             throw err;
           }
           if (result) {
-            req.session.user = { email: email, name: results[0].name };
+            req.session.user = {
+              id: results[0].id, // add the user_id to the session object
+              email: email,
+              name: results[0].name,
+            };
             return res.redirect("/");
           } else {
             res.render("login", { error: "Incorrect password" });
@@ -119,20 +124,18 @@ app.post("/post", upload.single("img"), (req, res) => {
   const title = req.body.title;
   const text = req.body.text;
   const img = req.file ? `/uploads/${req.file.filename}` : "";
+  const user_id = req.session.user.id; // retrieve the user_id from the session object
 
-  const sqlInsert = "INSERT INTO post (title, text, img) VALUES (?, ?, ?);";
-  db.query(
-    "INSERT INTO post (title, text, img) VALUES (?, ?, ?)",
-    [title, text, img],
-    (err, results) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send("Error creating post");
-      } else {
-        res.redirect("/");
-      }
+  const sqlInsert =
+    "INSERT INTO post (title, text, img, user_id) VALUES (?, ?, ?, ?);";
+  db.query(sqlInsert, [title, text, img, user_id], (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Error creating post");
+    } else {
+      res.redirect("/");
     }
-  );
+  });
 });
 
 app.listen(3000, function () {
