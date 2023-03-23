@@ -21,7 +21,8 @@
       <div class="dropdown">
         <i class="fas fa-user-circle dropdown-toggle"></i>
         <div class="dropdown-menu">
-          <a href="/my-posts">My-posts</a>
+          <a href="/post">Create Post</a>
+          <a href="/my-posts">My Posts</a>
           <a href="/logout">Log Out</a>
         </div>
       </div>
@@ -37,6 +38,9 @@
         <% } %>
         <div class="post-info">
           <h2><a href="/post/<%= post.id %>"><%= post.title %></a></h2>
+          <div class="post-text">
+            <p><%= post.text %></p>
+          </div>
           <div class="post-meta">
             <span class="post-author">
               <i class="user-icon fas fa-user"></i>
@@ -47,7 +51,6 @@
               <%= formatDate(post.date) %>
             </span>
           </div>
-          <p><%= post.text %></p>
         </div>
       </article>
       <% }) %>

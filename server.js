@@ -117,7 +117,7 @@ app.get("/post", function (req, res) {
   if (!req.session.user) {
     return res.redirect("/login");
   }
-  res.render("post");
+  res.render("post", { req: req });
 });
 
 app.post("/post", upload.single("img"), (req, res) => {

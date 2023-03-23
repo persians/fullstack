@@ -5,79 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" type="text/css" href="/assets/post_style.css" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
     <title>Blog Post Form</title>
   </head>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    form {
-      max-width: 600px;
-      margin: 0 auto;
-      text-align: left;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    input[type="text"],
-    input[type="file"] {
-      padding: 10px;
-      width: 100%;
-      box-sizing: border-box;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    button[type="submit"] {
-      padding: 10px 20px;
-      border-radius: 5px;
-      background-color: #4caf50;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      float: right;
-    }
-
-    a {
-      display: inline-block;
-      margin-bottom: 20px;
-      color: blue;
-      text-decoration: none;
-    }
-  </style>
-  <body>
-    <h2>Create a New Blog Post</h2>
-    <a href="/">Go back</a>
-    <br /><br />
-    <form action="/post" method="POST" enctype="multipart/form-data">
-      <div class="form-group">
-        <label for="title">Title:</label>
-        <input type="text" name="title" class="form-control" />
+  <body class="dark-mode">
+    <header>
+      <a href="/">Go back</a>
+      <% if (req.session.user) { %>
+      <p>Hello, <%= req.session.user.name %></p>
+      <div class="dropdown">
+        <i class="fas fa-user-circle dropdown-toggle"></i>
+        <div class="dropdown-menu">
+          <a href="/post">Create Post</a>
+          <a href="/my-posts">My Posts</a>
+          <a href="/logout">Log Out</a>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="text">Text:</label>
-        <input type="text" name="text" class="form-control" />
-      </div>
-      <div class="form-group">
-        <label for="img">Image:</label>
-        <input type="file" accept="image/*" name="img" class="form-control" />
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+      <% } else { %>
+      <a href="/login">Login</a>
+      <% } %>
+    </header>
+    <main>
+      <h2>Create a New Blog Post</h2>
+      <br /><br />
+      <form action="/post" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="title">Title:</label>
+          <input type="text" name="title" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="text">Text:</label>
+          <input type="text" name="text" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="img">Image:</label>
+          <input type="file" accept="image/*" name="img" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </main>
+    <script src="/assets/main.js"></script>
   </body>
 </html>

@@ -1,0 +1,56 @@
+@import "base"; // Importing the base styles from _base.scss
+
+body.dark-mode {
+  font-family: "Font Awesome 5 Free";
+
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 50px;
+  }
+
+  a {
+    display: inline-block;
+    &:hover {
+      color: darken($link-color, 10%);
+    }
+  }
+
+  form {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"],
+    input[type="file"] {
+      padding: 10px;
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button[type="submit"] {
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: $link-color;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      float: right;
+      &:hover {
+        background-color: darken($link-color, 10%);
+      }
+    }
+  }
+}

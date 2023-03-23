@@ -1,3 +1,9 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
 body.dark-mode {
   background-color: #1a1a1b;
   color: #ffffff;
@@ -11,6 +17,7 @@ body.dark-mode header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #2a2a2d;
 }
 body.dark-mode header h1 {
   font-size: 24px;
@@ -51,17 +58,18 @@ body.dark-mode header .dropdown .dropdown-menu a:hover {
 body.dark-mode header .dropdown:hover .dropdown-menu {
   display: block;
 }
-body.dark-mode main {
+
+main {
   padding: 16px;
 }
-body.dark-mode main .post-card {
+main .post-card {
   display: flex;
   background-color: #343536;
   border-radius: 8px;
   margin-bottom: 16px;
   padding: 16px;
 }
-body.dark-mode main .post-card img {
+main .post-card img {
   max-width: 200px;
   max-height: 200px;
   min-width: 200px;
@@ -71,23 +79,29 @@ body.dark-mode main .post-card img {
      object-fit: cover;
   border-radius: 8px;
 }
-body.dark-mode main .post-card .post-info {
+main .post-card .post-info {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   flex-grow: 1;
 }
-body.dark-mode main .post-card .post-info h2 {
+main .post-card .post-info .post-text {
+  background-color: rgba(248, 248, 248, 0.062745098);
+  padding-top: 50px;
+  padding-bottom: 50px;
+  padding-left: 10px;
+}
+main .post-card .post-info h2 {
   font-size: 20px;
   font-weight: bold;
   margin: 0;
   margin-bottom: 4px;
 }
-body.dark-mode main .post-card .post-info p {
+main .post-card .post-info p {
   margin: 0;
   margin-bottom: 8px;
 }
-body.dark-mode main .post-card .post-info .post-meta {
+main .post-card .post-info .post-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -96,26 +110,27 @@ body.dark-mode main .post-card .post-info .post-meta {
   font-size: 12px;
   margin-bottom: 8px;
 }
-body.dark-mode main .post-card .post-info .post-meta .author {
+main .post-card .post-info .post-meta .author {
   display: flex;
   align-items: center;
 }
-body.dark-mode main .post-card .post-info .post-meta .author img {
+main .post-card .post-info .post-meta .author img {
   max-width: 32px;
   max-height: 32px;
   border-radius: 50%;
   margin-right: 8px;
 }
-body.dark-mode main .post-card .post-info .post-meta .author .user-icon {
+main .post-card .post-info .post-meta .author .user-icon {
   margin-right: 4px;
 }
-body.dark-mode main .post-card .post-info .post-meta .author span {
+main .post-card .post-info .post-meta .author span {
   font-weight: bold;
 }
-body.dark-mode main .post-card .post-info .post-meta .date {
+main .post-card .post-info .post-meta .date {
   font-style: italic;
 }
-body.dark-mode footer {
+
+footer {
   padding: 16px;
   display: flex;
   justify-content: center;
@@ -123,41 +138,7 @@ body.dark-mode footer {
   font-size: 14px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
-body.dark-mode footer a {
+footer a {
   color: #5f99cf;
   text-decoration: none;
-}
-body.dark-mode footer .post-content {
-  padding: 16px;
-  background-color: #343536;
-  border-radius: 8px;
-}
-body.dark-mode footer .post-content img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 16px;
-}
-body.dark-mode footer .post-content h2 {
-  font-size: 24px;
-  font-weight: bold;
-  margin: 0 0 16px 0;
-}
-body.dark-mode footer .post-content p {
-  margin: 0 0 16px 0;
-}
-body.dark-mode footer .post-content .post-date-time {
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  margin-bottom: 8px;
-}
-body.dark-mode footer .post-content .post-date-time .calendar-icon {
-  margin-right: 4px;
-}
-body.dark-mode footer .post-content .post-author {
-  font-size: 14px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
 }/*# sourceMappingURL=style.css.map */

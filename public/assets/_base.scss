@@ -1,0 +1,76 @@
+// Define colors
+$background-color: #1a1a1b;
+$text-color: #ffffff;
+$link-color: #5f99cf;
+$card-background-color: #343536;
+$dropdown-background-color: #1a1a1b;
+$navbar-background-color: #2a2a2d;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body.dark-mode {
+  background-color: $background-color;
+  color: $text-color;
+
+  a {
+    color: $link-color;
+    text-decoration: none;
+  }
+
+  header {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $navbar-background-color;
+
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+
+      .dropdown-toggle {
+        cursor: pointer;
+      }
+
+      .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        min-width: 160px;
+        padding: 12px 0;
+        margin: 2px 0 0;
+        font-size: 14px;
+        text-align: left;
+        list-style: none;
+        background-color: $dropdown-background-color;
+        border-radius: 4px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+
+        a {
+          display: block;
+          padding: 3px 20px;
+          color: $text-color;
+          text-decoration: none;
+          &:hover {
+            background-color: darken($dropdown-background-color, 10%);
+          }
+        }
+      }
+
+      &:hover .dropdown-menu {
+        display: block;
+      }
+    }
+  }
+}

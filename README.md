@@ -33,3 +33,10 @@
     - Redid the entire design (dark mode).
 
     Next Steps: [Redo the css for the login / register and create-post / my-post]
+
+## 23 March
+
+    Accomplishements:
+    - Multiple css changes (_base.scss / theme).
+
+    Next Steps: [Add an administrator account with its own management menu. Add a trending slideshow at the top of the posts.]
