@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>My Posts</title>
+    <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+    <style>
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      article {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 90%;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        margin-right: 20px;
+      }
+
+      .post-info {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+
+      .post-meta {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .post-actions {
+        display: flex;
+        gap: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>My Posts</h1>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/logout">Log Out</a>
+      </nav>
+    </header>
+    <main>
+      <% data.forEach(function (post) { %>
+      <article>
+        <% if(post.img != ''){ %>
+        <img src="<%= post.img %>" alt="post image" />
+        <% } %>
+        <div class="post-info">
+          <h2><%= post.title %></h2>
+          <p><%= post.text %></p>
+          <div class="post-meta">
+            <p>Posted by <%= post.name %></p>
+            <p><%= post.date %></p>
+          </div>
+          <div class="post-actions">
+            <form action="/my-posts/edit/<%= post.id %>" method="get">
+              <button type="submit">Edit</button>
+            </form>
+            <form action="/my-posts/delete/<%= post.id %>" method="post">
+              <button type="submit">Delete</button>
+            </form>
+          </div>
+        </div>
+      </article>
+      <% }) %>
+    </main>
+    <script src="/assets/main.js"></script>
+  </body>
+</html>

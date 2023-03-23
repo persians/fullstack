@@ -1,42 +1,163 @@
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #333;
-  color: #fff;
-  padding: 1rem;
+body.dark-mode {
+  background-color: #1a1a1b;
+  color: #ffffff;
 }
-header h1 {
-  font-size: 2rem;
-  margin: 0;
-}
-header a {
-  color: #fff;
+body.dark-mode a {
+  color: #5f99cf;
   text-decoration: none;
 }
-header a:hover {
-  text-decoration: underline;
+body.dark-mode header {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-
-main {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
-  padding: 1rem;
-}
-main article {
-  background-color: #fff;
-  padding: 1rem;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-main article img {
-  max-width: 100%;
-}
-main article h2 {
-  font-size: 1.5rem;
+body.dark-mode header h1 {
+  font-size: 24px;
+  font-weight: bold;
   margin: 0;
 }
-main article p {
-  margin: 0.5rem 0;
+body.dark-mode header .dropdown {
+  position: relative;
+  display: inline-block;
+}
+body.dark-mode header .dropdown .dropdown-toggle {
+  cursor: pointer;
+}
+body.dark-mode header .dropdown .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 160px;
+  padding: 12px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: #1a1a1b;
+  border-radius: 4px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+}
+body.dark-mode header .dropdown .dropdown-menu a {
+  display: block;
+  padding: 3px 20px;
+  color: #ffffff;
+  text-decoration: none;
+}
+body.dark-mode header .dropdown .dropdown-menu a:hover {
+  background-color: #010101;
+}
+body.dark-mode header .dropdown:hover .dropdown-menu {
+  display: block;
+}
+body.dark-mode main {
+  padding: 16px;
+}
+body.dark-mode main .post-card {
+  display: flex;
+  background-color: #343536;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  padding: 16px;
+}
+body.dark-mode main .post-card img {
+  max-width: 200px;
+  max-height: 200px;
+  min-width: 200px;
+  min-height: 200px;
+  margin-right: 16px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 8px;
+}
+body.dark-mode main .post-card .post-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+body.dark-mode main .post-card .post-info h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 4px;
+}
+body.dark-mode main .post-card .post-info p {
+  margin: 0;
+  margin-bottom: 8px;
+}
+body.dark-mode main .post-card .post-info .post-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 400;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+body.dark-mode main .post-card .post-info .post-meta .author {
+  display: flex;
+  align-items: center;
+}
+body.dark-mode main .post-card .post-info .post-meta .author img {
+  max-width: 32px;
+  max-height: 32px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+body.dark-mode main .post-card .post-info .post-meta .author .user-icon {
+  margin-right: 4px;
+}
+body.dark-mode main .post-card .post-info .post-meta .author span {
+  font-weight: bold;
+}
+body.dark-mode main .post-card .post-info .post-meta .date {
+  font-style: italic;
+}
+body.dark-mode footer {
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+body.dark-mode footer a {
+  color: #5f99cf;
+  text-decoration: none;
+}
+body.dark-mode footer .post-content {
+  padding: 16px;
+  background-color: #343536;
+  border-radius: 8px;
+}
+body.dark-mode footer .post-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+body.dark-mode footer .post-content h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 0 16px 0;
+}
+body.dark-mode footer .post-content p {
+  margin: 0 0 16px 0;
+}
+body.dark-mode footer .post-content .post-date-time {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+body.dark-mode footer .post-content .post-date-time .calendar-icon {
+  margin-right: 4px;
+}
+body.dark-mode footer .post-content .post-author {
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
 }/*# sourceMappingURL=style.css.map */

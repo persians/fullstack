@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= post.title %></title>
+    <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+  </head>
+  <body class="dark-mode">
+    <header>
+      <h1><a href="/">Random Blog</a></h1>
+    </header>
+    <main>
+      <article class="post-content">
+        <% if(post.img != ''){ %>
+        <img src="<%= post.img %>" alt="post image" />
+        <% } %>
+        <h2><%= post.title %></h2>
+        <p class="post-date"><%= post.date %></p>
+        <p><%= post.text %></p>
+        <p class="post-author">Posted by <%= post.name %></p>
+      </article>
+    </main>
+    <script src="/assets/main.js"></script>
+  </body>
+</html>

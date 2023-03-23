@@ -1,44 +1,198 @@
-$primary-color: #333;
+// Define colors
+$background-color: #1a1a1b;
+$text-color: #ffffff;
+$link-color: #5f99cf;
+$card-background-color: #343536;
+$dropdown-background-color: #1a1a1b;
 
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: $primary-color;
-  color: #fff;
-  padding: 1rem;
-  h1 {
-    font-size: 2rem;
-    margin: 0;
-  }
+body.dark-mode {
+  background-color: $background-color;
+  color: $text-color;
+
   a {
-    color: #fff;
+    color: $link-color;
     text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
   }
-}
 
-main {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
-  padding: 1rem;
-  article {
-    background-color: #fff;
-    padding: 1rem;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    img {
-      max-width: 100%;
-    }
-    h2 {
-      font-size: 1.5rem;
+  header {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
       margin: 0;
     }
-    p {
-      margin: 0.5rem 0;
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+
+      .dropdown-toggle {
+        cursor: pointer;
+      }
+
+      .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        min-width: 160px;
+        padding: 12px 0;
+        margin: 2px 0 0;
+        font-size: 14px;
+        text-align: left;
+        list-style: none;
+        background-color: $dropdown-background-color;
+        border-radius: 4px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+
+        a {
+          display: block;
+          padding: 3px 20px;
+          color: $text-color;
+          text-decoration: none;
+          &:hover {
+            background-color: darken($dropdown-background-color, 10%);
+          }
+        }
+      }
+
+      &:hover .dropdown-menu {
+        display: block;
+      }
+    }
+  }
+
+  main {
+    padding: 16px;
+
+    .post-card {
+      display: flex;
+      background-color: $card-background-color;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      padding: 16px;
+
+      img {
+        max-width: 200px;
+        max-height: 200px;
+        min-width: 200px;
+        min-height: 200px;
+        margin-right: 16px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+
+      .post-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-grow: 1;
+
+        h2 {
+          font-size: 20px;
+          font-weight: bold;
+          margin: 0;
+          margin-bottom: 4px;
+        }
+
+        p {
+          margin: 0;
+          margin-bottom: 8px;
+        }
+
+        .post-meta {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-family: "Font Awesome 5 Free"; // Apply Font Awesome 5 Free
+          font-weight: 400; // Set font-weight for Font Awesome 5 Free
+          font-size: 12px; // Reduced font size
+          margin-bottom: 8px;
+
+          .author {
+            display: flex;
+            align-items: center;
+
+            img {
+              max-width: 32px;
+              max-height: 32px;
+              border-radius: 50%;
+              margin-right: 8px;
+            }
+
+            .user-icon {
+              margin-right: 4px;
+            }
+
+            span {
+              font-weight: bold;
+            }
+          }
+
+          .date {
+            font-style: italic;
+          }
+        }
+      }
+    }
+  }
+
+  footer {
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    border-top: 1px solid rgba($text-color, 0.1);
+
+    a {
+      color: $link-color;
+      text-decoration: none;
+    }
+
+    .post-content {
+      padding: 16px;
+      background-color: $card-background-color;
+      border-radius: 8px;
+
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 16px;
+      }
+
+      h2 {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 0 0 16px 0;
+      }
+
+      p {
+        margin: 0 0 16px 0;
+      }
+
+      .post-date-time {
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+
+        .calendar-icon {
+          margin-right: 4px;
+        }
+      }
+
+      .post-author {
+        font-size: 14px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+      }
     }
   }
 }

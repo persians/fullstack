@@ -6,27 +6,49 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Random Blog</title>
     <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
   </head>
-  <body>
+  <body class="dark-mode">
     <header>
       <h1>Random Blog</h1>
       <% if (req.session.user) { %>
       <p>Hello, <%= req.session.user.name %></p>
-      <a href="/logout">Log Out</a>
+      <div class="dropdown">
+        <i class="fas fa-user-circle dropdown-toggle"></i>
+        <div class="dropdown-menu">
+          <a href="/my-posts">My-posts</a>
+          <a href="/logout">Log Out</a>
+        </div>
+      </div>
       <% } else { %>
       <a href="/login">Login</a>
       <% } %>
     </header>
     <main>
       <% data.forEach(function (post) { %>
-      <article>
+      <article class="post-card">
         <% if(post.img != ''){ %>
         <img src="<%= post.img %>" alt="post image" />
         <% } %>
-        <h2><%= post.title %></h2>
-        <p><%= post.date %></p>
-        <p><%= post.text %></p>
-        <p>Posted by <%= post.name %></p>
+        <div class="post-info">
+          <h2><a href="/post/<%= post.id %>"><%= post.title %></a></h2>
+          <div class="post-meta">
+            <span class="post-author">
+              <i class="user-icon fas fa-user"></i>
+              <%= post.name %>
+            </span>
+            <span class="post-date-time">
+              <i class="calendar-icon fas fa-calendar"></i>
+              <%= formatDate(post.date) %>
+            </span>
+          </div>
+          <p><%= post.text %></p>
+        </div>
       </article>
       <% }) %>
     </main>

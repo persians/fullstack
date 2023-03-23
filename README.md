@@ -20,6 +20,15 @@
 
     Accomplishments:
     - Fixed the post function.
-    - added user logs.
+    - Added user logs.
 
     Next Steps: [Add a create post tab and a manage post tab.]
+
+## 16 March
+
+    Accomplishements:
+    - Added an idividual page for each post.
+    - Added a my-posts section for users.
+    - Redid the entire design (dark mode).
+
+    Next Steps: [Redo the css for the login / register and create-post / my-post]
