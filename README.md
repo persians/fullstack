@@ -29,6 +29,7 @@
     Accomplishements:
     - Added an idividual page for each post.
     - Added a my-posts section for users.
+    - Added the option for users to delete / edit their own posts.
     - Redid the entire design (dark mode).
 
     Next Steps: [Redo the css for the login / register and create-post / my-post]
