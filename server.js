@@ -34,7 +34,12 @@ app.get("/", function (req, res) {
     if (err) {
       throw err;
     } else {
-      obj = { data: results, req: req, formatDate: formatDate };
+      obj = {
+        data: results,
+        req: req,
+        isAdmin: req.session.user.isAdmin,
+        formatDate: formatDate,
+      };
       console.log(obj);
       res.render("index", obj);
     }
@@ -90,6 +95,7 @@ app.post("/login", function (req, res) {
               id: results[0].id, // add the user_id to the session object
               email: email,
               name: results[0].name,
+              isAdmin: results[0].admin,
             };
             return res.redirect("/");
           } else {
@@ -185,21 +191,26 @@ app.get("/my-posts/edit/:id", function (req, res) {
   const postId = req.params.id;
   const userId = req.session.user.id;
 
-  const sql = "SELECT * FROM post WHERE id = ? AND user_id = ?";
-  db.query(sql, [postId, userId], function (err, results) {
-    if (err) {
-      throw err;
-    } else {
-      if (results.length > 0) {
-        let post = results[0];
-        res.render(path.join(__dirname, "public/routes/edit-post"), {
-          post: post,
-        });
+  const sql = "SELECT * FROM post WHERE id = ? AND (user_id = ? OR ?)";
+  db.query(
+    sql,
+    [postId, userId, req.session.user.isAdmin],
+    function (err, results) {
+      if (err) {
+        throw err;
       } else {
-        res.status(404).send("Post not found");
+        if (results.length > 0) {
+          let post = results[0];
+          res.render(path.join(__dirname, "public/routes/edit-post"), {
+            post: results[0],
+            isAdmin: req.session.user.isAdmin, // pass the isAdmin variable to the template
+          });
+        } else {
+          res.status(404).send("Post not found");
+        }
       }
     }
-  });
+  );
 });
 
 app.post("/my-posts/edit/:id", upload.single("img"), (req, res) => {
@@ -209,30 +220,48 @@ app.post("/my-posts/edit/:id", upload.single("img"), (req, res) => {
   const text = req.body.text;
   const newImg = req.file ? `/uploads/${req.file.filename}` : "";
 
-  const sqlSelect = "SELECT img FROM post WHERE id = ? AND user_id = ?";
-  db.query(sqlSelect, [postId, userId], (err, results) => {
-    if (err) {
-      console.log(err);
-      res.status(500).send("Error updating post");
-    } else {
-      const img = newImg !== "" ? newImg : results[0].img;
+  console.log("postId:", postId);
+  console.log("userId:", userId);
 
-      const sqlUpdate =
-        "UPDATE post SET title = ?, text = ?, img = ? WHERE id = ? AND user_id = ?";
-      db.query(
-        sqlUpdate,
-        [title, text, img, postId, userId],
-        (err, results) => {
-          if (err) {
-            console.log(err);
-            res.status(500).send("Error updating post");
-          } else {
-            res.redirect("/my-posts");
-          }
+  const sqlSelect = "SELECT img FROM post WHERE id = ? AND (user_id = ? OR ?)";
+  db.query(
+    sqlSelect,
+    [postId, userId, req.session.user.isAdmin],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Error updating post");
+      } else {
+        console.log("SELECT query results:", results); // Add this line to print the query results
+
+        if (results.length > 0) {
+          const img = newImg !== "" ? newImg : results[0].img;
+
+          const sqlUpdate =
+            "UPDATE post SET title = ?, text = ?, img = ? WHERE id = ? AND (user_id = ? OR ?)";
+          db.query(
+            sqlUpdate,
+            [title, text, img, postId, userId, req.session.user.isAdmin],
+            (err, results) => {
+              if (err) {
+                console.log(err);
+                res.status(500).send("Error updating post");
+              } else {
+                // Check if user is admin and redirect to main page
+                if (req.session.user.isAdmin) {
+                  res.redirect("/");
+                } else {
+                  res.redirect("/my-posts");
+                }
+              }
+            }
+          );
+        } else {
+          res.status(404).send("Post not found");
         }
-      );
+      }
     }
-  });
+  );
 });
 
 app.post("/my-posts/delete/:id", function (req, res) {
@@ -272,6 +301,106 @@ function formatDate(dateString) {
 
   return `${month} ${day}, ${year}`;
 }
+
+function checkAdmin(req, res, next) {
+  if (!req.session.user || !req.session.user.isAdmin) {
+    return res.status(403).send("Forbidden");
+  }
+  next();
+}
+
+app.get("/admin-panel", checkAdmin, function (req, res) {
+  let usersPromise = new Promise((resolve, reject) => {
+    db.query("SELECT id, name, email, admin FROM users", (err, results) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+
+  let postsPromise = new Promise((resolve, reject) => {
+    db.query("SELECT id, title, text, user_id FROM post", (err, results) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+
+  Promise.all([usersPromise, postsPromise])
+    .then((results) => {
+      res.render("admin_panel", {
+        users: results[0],
+        posts: results[1],
+        isAdmin: req.session.user.isAdmin, // add isAdmin to the object
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error loading admin panel");
+    });
+});
+
+app.post("/delete-user/:id", checkAdmin, function (req, res) {
+  const userId = req.params.id;
+  db.query("DELETE FROM users WHERE id = ?", [userId], (err, results) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send("Error deleting user");
+    } else {
+      res.redirect("/admin-panel");
+    }
+  });
+});
+
+app.get("/edit-post/:id", checkAdmin, function (req, res) {
+  const postId = req.params.id;
+  db.query("SELECT * FROM post WHERE id = ?", [postId], (err, results) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send("Error loading post data");
+    } else if (results.length === 0) {
+      // Check if there are no results
+      res.status(404).send("Post not found");
+    } else {
+      res.render(path.join(__dirname, "public/routes/edit-post"), {
+        post: results[0],
+      });
+    }
+  });
+});
+
+app.post("/edit-post/:id", checkAdmin, function (req, res) {
+  const postId = req.params.id;
+  const { title, text } = req.body;
+  db.query(
+    "UPDATE post SET title = ?, text = ? WHERE id = ?",
+    [title, text, postId],
+    (err, results) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send("Error updating post data");
+      } else {
+        res.redirect("/admin-panel");
+      }
+    }
+  );
+});
+
+app.get("/delete-post/:id", checkAdmin, function (req, res) {
+  const postId = req.params.id;
+  db.query("DELETE FROM post WHERE id = ?", [postId], (err, results) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send("Error deleting post");
+    } else {
+      res.redirect("/admin-panel");
+    }
+  });
+});
 
 app.listen(3000, function () {
   console.log("Server is running on port 3000");

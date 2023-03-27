@@ -62,7 +62,11 @@
   </style>
   <body>
     <h2>Edit Blog Post</h2>
+    <% if (isAdmin) { %>
+    <a href="/admin-panel">Go back</a>
+    <% } else { %>
     <a href="/my-posts">Go back</a>
+    <% } %>
     <br /><br />
     <form
       action="/my-posts/edit/<%= post.id %>"
@@ -97,7 +101,11 @@
         </p>
         <% } %>
       </div>
+      <% if (isAdmin) { %>
       <button type="submit" class="btn btn-primary">Update</button>
+      <% } else { %>
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+      <% } %>
     </form>
   </body>
 </html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel</title>
+  </head>
+  <body>
+    <h1>Admin Panel</h1>
+    <h2>Users</h2>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Admin</th>
+        <th>Actions</th>
+      </tr>
+      <% users.forEach((user) => { %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.admin ? 'Yes' : 'No' %></td>
+        <td>
+          <a href="/edit-user/<%= user.id %>">Edit</a> |
+          <a href="/delete-user/<%= user.id %>">Delete</a>
+        </td>
+      </tr>
+      <% }); %>
+    </table>
+    <h2>Posts</h2>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Text</th>
+        <th>User ID</th>
+        <th>Actions</th>
+      </tr>
+      <% posts.forEach((post) => { %>
+      <tr>
+        <td><%= post.id %></td>
+        <td><%= post.title %></td>
+        <td><%= post.text %></td>
+        <td><%= post.user_id %></td>
+        <td>
+          <a href="/edit-post/<%= post.id %>">Edit</a> |
+          <a href="/delete-post/<%= post.id %>">Delete</a>
+        </td>
+      </tr>
+      <% }); %>
+    </table>
+  </body>
+</html>
