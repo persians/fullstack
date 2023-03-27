@@ -1,0 +1,37 @@
+// Define colors
+$background-color: #1a1a1b;
+$text-color: #ffffff;
+$link-color: #5f99cf;
+$card-background-color: #343536;
+$dropdown-background-color: #1a1a1b;
+$navbar-background-color: #2a2a2d;
+$border-color: #ccc;
+$box-shadow-color: rgba(0, 0, 0, 0.1);
+
+// Other styles
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body.dark-mode {
+  background-color: $background-color;
+  color: $text-color;
+
+  a {
+    color: $link-color;
+    text-decoration: none;
+  }
+
+  // Add your new styles here
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  main {
+    display: flex;
+  }
+}
