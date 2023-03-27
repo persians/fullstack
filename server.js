@@ -249,7 +249,7 @@ app.post("/my-posts/edit/:id", upload.single("img"), (req, res) => {
               } else {
                 // Check if user is admin and redirect to main page
                 if (req.session.user.isAdmin) {
-                  res.redirect("/");
+                  res.redirect("/admin-panel");
                 } else {
                   res.redirect("/my-posts");
                 }
@@ -368,6 +368,7 @@ app.get("/edit-post/:id", checkAdmin, function (req, res) {
     } else {
       res.render(path.join(__dirname, "public/routes/edit-post"), {
         post: results[0],
+        isAdmin: req.session.user.isAdmin,
       });
     }
   });
