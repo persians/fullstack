@@ -178,6 +178,7 @@ app.get("/my-posts", function (req, res) {
     } else {
       res.render(path.join(__dirname, "public/routes/my-posts"), {
         data: results,
+        user: req.session.user, // Pass the user object from the session
       });
     }
   });

@@ -7,6 +7,12 @@
     <title>My Posts</title>
     <link rel="stylesheet" type="text/css" href="/assets/base.css" />
     <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
     <style>
       header {
         display: flex;
@@ -72,10 +78,29 @@
   <body>
     <header>
       <h1>My Posts</h1>
-      <nav>
-        <a href="/">Home</a>
-        <a href="/logout">Log Out</a>
-      </nav>
+      <% if (user && user.isAdmin) { %>
+      <p>Hello, <%= user.name %></p>
+      <div class="dropdown">
+        <i class="fas fa-user-circle dropdown-toggle"> My Profile</i>
+        <div class="dropdown-menu">
+          <a href="/post">Create Post</a>
+          <a href="/admin-panel">Admin Panel</a>
+          <a href="/logout">Log Out</a>
+        </div>
+      </div>
+      <% } else if (req.session.user) { %>
+      <p>Hello, <%= req.session.user.name %></p>
+      <div class="dropdown">
+        <i class="fas fa-user-circle dropdown-toggle"> My Profile</i>
+        <div class="dropdown-menu">
+          <a href="/post">Create Post</a>
+          <a href="/my-posts">My Posts</a>
+          <a href="/logout">Log Out</a>
+        </div>
+      </div>
+      <% } else { %>
+      <a href="/login">Login</a>
+      <% } %>
     </header>
     <main>
       <% data.forEach(function (post) { %>
