@@ -40,3 +40,14 @@
     - Multiple css changes (_base.scss / theme).
 
     Next Steps: [Add an administrator account with its own management menu.]
+
+## 28 March
+
+    Accomplishements:
+    - Multiple css changes (removed _base and just imported style as the base).
+    - Added administrator account
+    - Added admin panel
+    - Added admin functions (Post management)
+    - Security updates
+
+    Next Steps: [Add function for editing and deleting users for the administrator / Add more stuff for the main index.ejs / polish the individual posts links.]
