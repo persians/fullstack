@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>My Posts</title>
-    <link rel="stylesheet" type="text/css" href="/assets/base.css" />
     <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+
     <link
       rel="stylesheet"
       href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
@@ -14,24 +14,6 @@
       crossorigin="anonymous"
     />
     <style>
-      header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #f8f9fa;
-        padding: 1rem;
-      }
-
-      nav a {
-        color: #333;
-        text-decoration: none;
-        margin-right: 1rem;
-      }
-
-      nav a:hover {
-        text-decoration: underline;
-      }
-
       main {
         display: flex;
         flex-direction: column;
@@ -75,7 +57,7 @@
       }
     </style>
   </head>
-  <body>
+  <body class="dark-mode">
     <header>
       <h1>My Posts</h1>
       <% if (user && user.isAdmin) { %>
