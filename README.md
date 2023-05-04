@@ -51,3 +51,12 @@
     - Security updates
 
     Next Steps: [Add function for editing and deleting users for the administrator / Add more stuff for the main index.ejs / polish the individual posts links.]
+
+## 4 May
+
+    Accomplishements:
+    - Added functionality for the user editing as admin
+    - Added Validators using a new node package
+    - Added a limit for text shown on the main page for each post
+
+    Next Steps: [Either start with comments / change css / Add compatiblility for other devices.]

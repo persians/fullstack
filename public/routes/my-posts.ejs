@@ -61,7 +61,7 @@
     <header>
       <h1>My Posts</h1>
       <% if (user && user.isAdmin) { %>
-      <p>Hello, <%= user.name %></p>
+      <p>Administrator</p>
       <div class="dropdown">
         <i class="fas fa-user-circle dropdown-toggle"> My Profile</i>
         <div class="dropdown-menu">
@@ -70,8 +70,7 @@
           <a href="/logout">Log Out</a>
         </div>
       </div>
-      <% } else if (req.session.user) { %>
-      <p>Hello, <%= req.session.user.name %></p>
+      <% } else if (user) { %>
       <div class="dropdown">
         <i class="fas fa-user-circle dropdown-toggle"> My Profile</i>
         <div class="dropdown-menu">
@@ -94,7 +93,6 @@
           <h2><%= post.title %></h2>
           <p><%= post.text %></p>
           <div class="post-meta">
-            <p>Posted by <%= post.name %></p>
             <p><%= post.date %></p>
           </div>
           <div class="post-actions">

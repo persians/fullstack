@@ -48,6 +48,9 @@
         <input type="submit" value="Submit" />
         <a href="/login">Log in</a>
       </form>
+      <% if (errors) { %> <% errors.forEach(function (error) { %>
+      <p style="color: red"><%= error.msg %></p>
+      <% }) %> <% } %>
       <br />
     </div>
   </body>

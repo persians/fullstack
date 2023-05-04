@@ -46,31 +46,61 @@ app.get("/", function (req, res) {
   });
 });
 
-app.get("/register", function (req, res) {
-  res.render("register");
+app.get("/register", (req, res) => {
+  res.render("register", { errors: null });
 });
 
-app.post("/register", function (req, res) {
-  const name = req.body.name;
-  const email = req.body.email;
-  const password = req.body.password;
+const { body, validationResult } = require("express-validator");
 
-  bcrypt.hash(password, 10, function (err, hash) {
-    if (err) {
-      throw err;
-    } else {
-      const sqlInsert =
-        "INSERT INTO users (name, email, password) VALUES (?, ?, ?);";
-      db.query(sqlInsert, [name, email, hash], (err, result) => {
-        if (err) {
-          throw err;
-        } else {
-          res.render("registered");
-        }
-      });
+app.post(
+  "/register",
+  [
+    // Validation checks
+    body("name")
+      .trim()
+      .notEmpty()
+      .withMessage("Name is required")
+      .isLength({ min: 2 })
+      .withMessage("Name must be at least 2 characters long"),
+    body("email")
+      .trim()
+      .isEmail()
+      .withMessage("Email must be a valid email address"),
+    body("password")
+      .isLength({ min: 8 })
+      .withMessage("Password must be at least 8 characters long")
+      .matches(/\d/)
+      .withMessage("Password must contain a number"),
+  ],
+  function (req, res) {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      // If there are errors, render the registration page with an error message
+      return res.render("register", { errors: errors.array() });
     }
-  });
-});
+
+    const name = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
+
+    bcrypt.hash(password, 10, function (err, hash) {
+      if (err) {
+        throw err;
+      } else {
+        const sqlInsert =
+          "INSERT INTO users (name, email, password) VALUES (?, ?, ?);";
+        db.query(sqlInsert, [name, email, hash], (err, result) => {
+          if (err) {
+            throw err;
+          } else {
+            res.render("registered");
+          }
+        });
+      }
+    });
+  }
+);
 
 app.get("/login", function (req, res) {
   res.render("login");
@@ -345,7 +375,7 @@ app.get("/admin-panel", checkAdmin, function (req, res) {
     });
 });
 
-app.post("/delete-user/:id", checkAdmin, function (req, res) {
+app.get("/delete-user/:id", checkAdmin, function (req, res) {
   const userId = req.params.id;
   db.query("DELETE FROM users WHERE id = ?", [userId], (err, results) => {
     if (err) {
@@ -355,6 +385,35 @@ app.post("/delete-user/:id", checkAdmin, function (req, res) {
       res.redirect("/admin-panel");
     }
   });
+});
+
+app.post("/edit-user/:id", checkAdmin, function (req, res) {
+  const userId = req.params.id;
+  const { name, email, admin } = req.body;
+  const isAdmin = admin === "on";
+
+  if (
+    req.session.user.id === parseInt(userId) &&
+    req.session.user.isAdmin &&
+    !isAdmin
+  ) {
+    return res
+      .status(400)
+      .send("Cannot remove administrator privileges from self");
+  }
+
+  db.query(
+    "UPDATE users SET name = ?, email = ?, admin = ? WHERE id = ?",
+    [name, email, isAdmin, userId],
+    (err, results) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send("Error updating user data");
+      } else {
+        res.redirect("/admin-panel");
+      }
+    }
+  );
 });
 
 app.get("/edit-post/:id", checkAdmin, function (req, res) {

@@ -17,9 +17,11 @@
     <header>
       <h1>Random Blog</h1>
       <% if (req.session.user && req.session.user.isAdmin) { %>
-      <p>Hello, <%= req.session.user.name %></p>
+      <p>Administrator</p>
       <div class="dropdown">
-        <i class="fas fa-user-circle dropdown-toggle"> My Profile</i>
+        <i class="fas fa-user-circle dropdown-toggle">
+          <%= req.session.user.name %></i
+        >
         <div class="dropdown-menu">
           <a href="/post">Create Post</a>
           <a href="/admin-panel">Admin Panel</a>
@@ -28,9 +30,10 @@
         </div>
       </div>
       <% } else if (req.session.user) { %>
-      <p>Hello, <%= req.session.user.name %></p>
       <div class="dropdown">
-        <i class="fas fa-user-circle dropdown-toggle"> My Profile</i>
+        <i class="fas fa-user-circle dropdown-toggle">
+          <%= req.session.user.name %></i
+        >
         <div class="dropdown-menu">
           <a href="/post">Create Post</a>
           <a href="/my-posts">My Posts</a>
@@ -42,6 +45,22 @@
       <% } %>
     </header>
     <main>
+      <script src="/assets/main.js"></script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          var postTexts = document.querySelectorAll(".post-text p");
+          var maxLength = 100; // Adjust this value as needed
+
+          postTexts.forEach(function (textElement) {
+            var originalText = textElement.textContent;
+
+            if (originalText.length > maxLength) {
+              var shortenedText = originalText.slice(0, maxLength) + "...";
+              textElement.textContent = shortenedText;
+            }
+          });
+        });
+      </script>
       <% data.forEach(function (post) { %>
       <article class="post-card">
         <% if(post.img != ''){ %>
