@@ -63,7 +63,7 @@
       <% if (user && user.isAdmin) { %>
       <p>Administrator</p>
       <div class="dropdown">
-        <i class="fas fa-user-circle dropdown-toggle"> My Profile</i>
+        <i class="fas fa-user-circle dropdown-toggle"> <%= user.name %></i>
         <div class="dropdown-menu">
           <a href="/post">Create Post</a>
           <a href="/admin-panel">Admin Panel</a>
@@ -72,7 +72,7 @@
       </div>
       <% } else if (user) { %>
       <div class="dropdown">
-        <i class="fas fa-user-circle dropdown-toggle"> My Profile</i>
+        <i class="fas fa-user-circle dropdown-toggle"> <%= user.name %></i>
         <div class="dropdown-menu">
           <a href="/post">Create Post</a>
           <a href="/my-posts">My Posts</a>
