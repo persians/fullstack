@@ -1,9 +1,6 @@
 # Node.js fullstack log
 
-## READ THIS:
-    
-    Make sure to use the sql file for you database provided in the folder.
-
+## READ THIS:  Make sure to use the sql file for you database provided in the folder.
 
 
 
