@@ -102,8 +102,8 @@ body.dark-mode form label {
   margin-bottom: 10px;
 }
 
-body.dark-mode form input[type="text"],
-body.dark-mode form input[type="file"] {
+body.dark-mode form input[type=text],
+body.dark-mode form input[type=file] {
   padding: 10px;
   width: 100%;
   box-sizing: border-box;
@@ -111,7 +111,7 @@ body.dark-mode form input[type="file"] {
   border: 1px solid #ccc;
 }
 
-body.dark-mode form button[type="submit"] {
+body.dark-mode form button[type=submit] {
   padding: 10px 20px;
   border-radius: 5px;
   background-color: #5f99cf;
@@ -121,6 +121,10 @@ body.dark-mode form button[type="submit"] {
   float: right;
 }
 
-body.dark-mode form button[type="submit"]:hover {
+body.dark-mode form button[type=submit]:hover {
   background-color: #3a80c1;
-} /*# sourceMappingURL=post.css.map */
+}
+
+body.dark-mode form textarea.form-control {
+  width: 100%;
+}/*# sourceMappingURL=post.css.map */

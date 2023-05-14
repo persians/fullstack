@@ -106,3 +106,7 @@ body.dark-mode form button[type="submit"] {
 body.dark-mode form button[type="submit"]:hover {
   background-color: #3a80c1;
 }
+body.dark-mode form textarea.form-control {
+  width: 100%;
+}
+

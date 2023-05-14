@@ -8,10 +8,12 @@ body.dark-mode {
   background-color: #1a1a1b;
   color: #ffffff;
 }
+
 body.dark-mode a {
   color: #5f99cf;
   text-decoration: none;
 }
+
 body.dark-mode header {
   padding: 16px;
   display: flex;
@@ -19,18 +21,23 @@ body.dark-mode header {
   align-items: center;
   background-color: #2a2a2d;
 }
+
 body.dark-mode header h1 {
   font-size: 24px;
   font-weight: bold;
   margin: 0;
 }
+
 body.dark-mode header .dropdown {
   position: relative;
   display: inline-block;
+  padding: 10px 20px;
 }
+
 body.dark-mode header .dropdown .dropdown-toggle {
   cursor: pointer;
 }
+
 body.dark-mode header .dropdown .dropdown-menu {
   display: none;
   position: absolute;
@@ -38,23 +45,26 @@ body.dark-mode header .dropdown .dropdown-menu {
   right: 0;
   min-width: 160px;
   padding: 12px 0;
-  margin: 2px 0 0;
   font-size: 14px;
-  text-align: left;
+  text-align: right;
   list-style: none;
   background-color: #1a1a1b;
   border-radius: 4px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  z-index: 1;
 }
+
 body.dark-mode header .dropdown .dropdown-menu a {
   display: block;
   padding: 3px 20px;
   color: #ffffff;
   text-decoration: none;
 }
+
 body.dark-mode header .dropdown .dropdown-menu a:hover {
   background-color: #010101;
 }
+
 body.dark-mode header .dropdown:hover .dropdown-menu {
   display: block;
 }
@@ -62,6 +72,7 @@ body.dark-mode header .dropdown:hover .dropdown-menu {
 main {
   padding: 16px;
 }
+
 main .post-card {
   display: flex;
   background-color: #343536;
@@ -69,6 +80,7 @@ main .post-card {
   margin-bottom: 16px;
   padding: 16px;
 }
+
 main .post-card img {
   max-width: 200px;
   max-height: 200px;
@@ -79,28 +91,33 @@ main .post-card img {
   object-fit: cover;
   border-radius: 8px;
 }
+
 main .post-card .post-info {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   flex-grow: 1;
 }
+
 main .post-card .post-info .post-text {
   background-color: rgba(248, 248, 248, 0.062745098);
   padding-top: 50px;
   padding-bottom: 50px;
   padding-left: 10px;
 }
+
 main .post-card .post-info h2 {
   font-size: 20px;
   font-weight: bold;
   margin: 0;
   margin-bottom: 4px;
 }
+
 main .post-card .post-info p {
   margin: 0;
   margin-bottom: 8px;
 }
+
 main .post-card .post-info .post-meta {
   display: flex;
   justify-content: space-between;
@@ -109,23 +126,28 @@ main .post-card .post-info .post-meta {
   font-weight: 400;
   font-size: 12px;
 }
+
 main .post-card .post-info .post-meta .author {
   display: flex;
   align-items: center;
 }
+
 main .post-card .post-info .post-meta .author img {
   max-width: 32px;
   max-height: 32px;
   border-radius: 50%;
   margin-right: 8px;
 }
-main .post-card .post-info .post-meta .author .user-icon {
+
+.main .post-card .post-info .post-meta .author .user-icon {
   margin-right: 4px;
 }
-main .post-card .post-info .post-meta .author span {
+
+.main .post-card .post-info .post-meta .author span {
   font-weight: bold;
 }
-main .post-card .post-info .post-meta .date {
+
+.main .post-card .post-info .post-meta .date {
   font-style: italic;
 }
 
@@ -137,7 +159,68 @@ footer {
   font-size: 14px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
+
 footer a {
   color: #5f99cf;
   text-decoration: none;
+}
+
+// Media Queries
+
+// 320px
+@media only screen and (max-width: 320px) {
+  body.dark-mode header h1 {
+    font-size: 20px;
+  }
+
+  main .post-card {
+    flex-direction: column;
+  }
+
+  main .post-card img {
+    margin-right: 0;
+    margin-bottom: 16px;
+    max-width: 100%;
+    max-height: 200px;
+    min-width: auto;
+    min-height: auto;
+  }
+
+  main .post-card .post-info .post-meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+// 768px
+@media only screen and (max-width: 768px) {
+  body.dark-mode header h1 {
+    font-size: 18px;
+  }
+
+  main .post-card {
+    padding: 12px;
+  }
+
+  main .post-card img {
+    margin-bottom: 12px;
+  }
+
+  main .post-card .post-info h2 {
+    font-size: 18px;
+  }
+}
+
+// 1200px
+@media only screen and (max-width: 1200px) {
+  body.dark-mode header h1 {
+    font-size: 28px;
+  }
+
+  main .post-card img {
+    max-width: 150px;
+    max-height: 150px;
+    min-width: 150px;
+    min-height: 150px;
+  }
 }

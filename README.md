@@ -60,3 +60,13 @@
     - Added a limit for text shown on the main page for each post
 
     Next Steps: [Either start with comments / change css / Add compatiblility for other devices.]
+
+
+## 14 May
+
+    Accomplishements:
+    - Added comments section (with deleting ur own comment (admins can delete everyones))
+    - Added media queries
+    - minor bug fixes and changes
+
+    WE DONE NOW.

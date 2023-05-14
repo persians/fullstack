@@ -23,6 +23,32 @@ app.use(
 
 var obj = {};
 
+app.use(function (req, res, next) {
+  res.locals.formatDate = function (dateString) {
+    const date = new Date(dateString);
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const month = monthNames[date.getMonth()];
+    const day = date.getDate();
+    const year = date.getFullYear();
+
+    return `${month} ${day}, ${year}`;
+  };
+  next();
+});
+
 app.get("/", function (req, res) {
   if (!req.session.user) {
     // If the user is not logged in, redirect them to the login page
@@ -174,7 +200,6 @@ app.post("/post", upload.single("img"), (req, res) => {
   });
 });
 
-// server.js
 app.get("/post/:id", function (req, res) {
   const postId = req.params.id;
 
@@ -186,7 +211,22 @@ app.get("/post/:id", function (req, res) {
     } else {
       if (results.length > 0) {
         let post = results[0];
-        res.render(path.join(__dirname, "public/routes/posts"), { post: post });
+
+        // Get the comments for this post
+        let sql =
+          "SELECT comment.*, users.name FROM comment JOIN users ON comment.user_id = users.id WHERE comment.post_id = ?";
+        db.query(sql, [postId], function (err, comments) {
+          if (err) {
+            throw err;
+          } else {
+            res.render(path.join(__dirname, "public/routes/posts"), {
+              post: post,
+              comments: comments,
+              user: req.session.user,
+              isAdmin: req.session.user.isAdmin,
+            });
+          }
+        });
       } else {
         res.status(404).send("Post not found");
       }
@@ -461,6 +501,77 @@ app.get("/delete-post/:id", checkAdmin, function (req, res) {
       res.redirect("/admin-panel");
     }
   });
+});
+
+app.post("/post/:id/comment", function (req, res) {
+  if (!req.session.user) {
+    return res.redirect("/login");
+  }
+
+  const postId = req.params.id;
+  const userId = req.session.user.id;
+  const text = req.body.text;
+
+  const sqlInsert =
+    "INSERT INTO comment (text, post_id, user_id) VALUES (?, ?, ?)";
+  db.query(sqlInsert, [text, postId, userId], (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Error creating comment");
+    } else {
+      res.redirect("/post/" + postId);
+    }
+  });
+});
+
+app.post("/post/:id/comment/:commentId/edit", function (req, res) {
+  if (!req.session.user) {
+    return res.redirect("/login");
+  }
+
+  const postId = req.params.postId;
+  const commentId = req.params.commentId;
+  const userId = req.session.user.id;
+  const text = req.body.text;
+
+  const sqlUpdate =
+    "UPDATE comment SET text = ? WHERE id = ? AND (user_id = ? OR ?)";
+  db.query(
+    sqlUpdate,
+    [text, commentId, userId, req.session.user.isAdmin],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Error updating comment data");
+      } else {
+        res.redirect("/post/" + postId);
+      }
+    }
+  );
+});
+
+app.post("/post/:id/comment/:commentId/delete", function (req, res) {
+  if (!req.session.user) {
+    return res.redirect("/login");
+  }
+
+  const postId = req.params.id;
+  const commentId = req.params.commentId;
+  const userId = req.session.user.id;
+
+  const sqlDelete = "DELETE FROM comment WHERE id = ? AND (user_id = ? OR ?)";
+  db.query(
+    sqlDelete,
+    [commentId, userId, req.session.user.isAdmin],
+    function (err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).send("Error deleting comment");
+      } else {
+        res.redirect("/post/" + postId);
+      }
+    }
+  );
 });
 
 app.listen(3000, function () {

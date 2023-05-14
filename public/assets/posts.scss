@@ -1,0 +1,243 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body.dark-mode {
+  background-color: #1a1a1b;
+  color: #ffffff;
+}
+
+body.dark-mode a {
+  color: #5f99cf;
+  text-decoration: none;
+}
+
+body.dark-mode header {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2a2a2d;
+}
+
+body.dark-mode header h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+body.dark-mode header .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+body.dark-mode header .dropdown .dropdown-toggle {
+  cursor: pointer;
+}
+
+body.dark-mode header .dropdown .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 160px;
+  padding: 12px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: #1a1a1b;
+  border-radius: 4px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+}
+
+body.dark-mode header .dropdown .dropdown-menu a {
+  display: block;
+  padding: 3px 20px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+body.dark-mode header .dropdown .dropdown-menu a:hover {
+  background-color: #010101;
+}
+
+body.dark-mode header .dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+main {
+  padding: 16px;
+}
+
+article.post-content {
+  background-color: #343536;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+article.post-content img {
+  max-width: 100%;
+  max-height: 300px; /* Set the maximum height for the image */
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+article.post-content h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+article.post-content p {
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+article.post-content .post-date {
+  font-size: 14px;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+article.post-content .post-author {
+  font-size: 14px;
+}
+
+.post-meta {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 320px) {
+  body.dark-mode header h1 {
+    font-size: 20px;
+  }
+
+  article.post-content img {
+    margin-bottom: 12px;
+  }
+
+  article.post-content h2 {
+    font-size: 20px;
+  }
+
+  article.post-content .post-date,
+  article.post-content .post-author {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body.dark-mode header h1 {
+    font-size: 18px;
+  }
+
+  article.post-content {
+    padding: 12px;
+  }
+
+  article.post-content img {
+    margin-bottom: 12px;
+    float: left; /* Float the image to the left on smaller screens */
+    margin-right: 16px; /* Add some spacing between image and text */
+  }
+
+  article.post-content h2 {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  body.dark-mode header h1 {
+    font-size: 28px;
+  }
+
+  article.post-content img {
+    max-width: 150px;
+    max-height: 150px;
+    min-width: 150px;
+    min-height: 150px;
+  }
+}
+.comments {
+  margin-top: 16px;
+}
+
+.comments h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.comment {
+  background-color: #343536;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.comment p {
+  margin: 0;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.comment strong {
+  font-weight: bold;
+}
+
+.comment:last-child {
+  margin-bottom: 0;
+}
+
+.comments form {
+  margin-top: 16px;
+}
+
+.comments textarea {
+  width: 100%;
+  height: 100px;
+  resize: vertical;
+  margin-bottom: 8px;
+}
+
+.comments button[type="submit"] {
+  background-color: #5f99cf;
+  color: #ffffff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.comments button[type="submit"]:hover {
+  background-color: #417aa4;
+}
+
+.comments p {
+  margin: 0;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.comments p a {
+  color: #5f99cf;
+}
+
+.comments p a:hover {
+  text-decoration: underline;
+}
+.comment-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-actions {
+  margin-left: auto;
+}
